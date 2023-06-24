@@ -1,4 +1,4 @@
-# battleship
+# Battleship
 
 Classic game of battleship, except it's on the web instead of a board.
 
