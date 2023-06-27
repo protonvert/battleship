@@ -1,5 +1,6 @@
-const Ship = (length, position) => {
+const Ship = (positions) => {
   let hits = 0
+  const length = positions.length
 
   const isSunk = () => {
     if (hits === length) return true
@@ -8,12 +9,13 @@ const Ship = (length, position) => {
 
   const hit = () => {
     hits++
-    return hits
   }
 
   return {
     isSunk,
-    hit
+    hit,
+    positions,
+    get hits () { return hits }
   }
 }
 

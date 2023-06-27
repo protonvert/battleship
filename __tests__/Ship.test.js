@@ -4,16 +4,21 @@ const Ship = require('../factories/Ship.js')
 describe('Ship Functions', () => {
   // assign variables to avoid beforeEach scoping issue
   let testCarrier
-
   beforeEach(() => {
-    testCarrier = Ship(5, [0, 1, 2, 3, 4])
+    testCarrier = Ship([0, 1, 2, 3, 4])
   })
 
   it('ship isSunk', () => {
-    expect(testCarrier.isSunk()).toBe(false)
+    testCarrier.hit()
+    testCarrier.hit()
+    testCarrier.hit()
+    testCarrier.hit()
+    testCarrier.hit()
+    expect(testCarrier.isSunk()).toBe(true)
   })
 
   it('hit ship', () => {
-    expect(testCarrier.hit(0)).toEqual(1)
+    testCarrier.hit()
+    expect(testCarrier.hits).toEqual(1)
   })
 })
