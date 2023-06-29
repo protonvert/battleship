@@ -1,6 +1,65 @@
 @primary-color: white;
-@bg: black;
+@bg: #00001C;
 h1 {
   color: @primary-color;
   background-color: @bg;
+}
+
+html {
+  background-color: @bg;
+  height: 100%;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: auto;
+
+  .hero-image {
+    display: flex;
+    margin: auto;
+    margin-top: 2%;
+
+    img {
+      width: 500px;
+    }
+  }
+}
+.gameboards {
+  display: flex;
+  margin-top: 7.5%;
+  justify-content: center;
+  gap: 10%;
+}
+.gameboards > * {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  border: 1px solid white;
+  width: 400px;
+  height: 400px;
+}
+
+.game-square {
+  outline: 1px solid white;
+
+  &:hover {
+    transition-property: background-color;
+    transition-duration: 100ms;
+    background-color: #3A3A50;
+  }
+
+  &:active {
+    transition-property: background-color;
+    transition-duration: 50ms;
+    background-color: #595979;
+  }
+
+  &.hit {
+    background-color: red;
+    border-radius: 20px;
+    transform:scale(0.3)
+  }
+
 }
