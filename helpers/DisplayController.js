@@ -25,34 +25,51 @@ const DisplayController = () => {
     }
   }
 
-  const updateSquaresOnClick = (userGameboard) => {
-    updateGameboardSquares(gameboardLeft, userGameboard)
+  const updatePlayerSquares = (playerGameboard) => {
+    const gameboardDisplayChildren = gameboardLeft.children
+    for (let i = 0; i < playerGameboard.length; i++) {
+      if (playerGameboard[i].taken === true) {
+        // add taken class to make it green
+        gameboardDisplayChildren[i].classList.add('taken')
+      }
+      if (playerGameboard[i].hit === true) {
+        gameboardDisplayChildren[i].classList.add('hit')
+      }
+    }
   }
 
-  const updateGameboardSquares = (gameboardElement, userGameboard) => {
-    let user = 'player'
-    // for each element of the gameboard (not the DOM element)
-    if (gameboardElement === gameboardRight) {
-      user = 'computer'
-    }
-    const board = userGameboard
-    const gameboardChildren = gameboardElement.children
-    for (let i = 0; i < userGameboard.length; i++) {
-      if (board[i].taken === true) {
+  const updateComputerBoard = (computerBoard) => {
+    const gameboardDisplayChildren = gameboardRight.children
+    for (let i = 0; i < computerBoard.length; i++) {
+      if (computerBoard[i].taken === true) {
         // add taken class to make it green
-        gameboardChildren[i].classList.add('taken')
+        gameboardDisplayChildren[i].classList.add('taken')
       }
-      if (board[i].hit === true) {
-        gameboardChildren[i].classList.add('hit')
+      if (computerBoard[i].hit === true) {
+        gameboardDisplayChildren[i].classList.add('hit')
       }
     }
   }
+
+  // const updateGameboardSquares = (gameboardElement, userGameboard) => {
+  //   const board = userGameboard
+  //   const gameboardChildren = gameboardElement.children
+  //   for (let i = 0; i < userGameboard.length; i++) {
+  //     if (board[i].taken === true) {
+  //       // add taken class to make it green
+  //       gameboardChildren[i].classList.add('taken')
+  //     }
+  //     if (board[i].hit === true) {
+  //       gameboardChildren[i].classList.add('hit')
+  //     }
+  //   }
+  // }
 
   const displayGameBoards = () => {
     mainContainer.append(gameboards)
   }
 
-  return { initializeGameboards, updateSquaresOnClick }
+  return { initializeGameboards, updatePlayerSquares, updateComputerBoard }
 }
 
 module.exports = DisplayController

@@ -1,5 +1,5 @@
 @primary-color: white;
-@bg: #00001C;
+@bg: #00001c;
 h1 {
   color: @primary-color;
   background-color: @bg;
@@ -32,13 +32,24 @@ html {
   justify-content: center;
   gap: 10%;
 }
-.gameboards > * {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(10, 1fr);
-  border: 1px solid white;
-  width: 400px;
-  height: 400px;
+.gameboards {
+  > * {
+    display: grid;
+    grid-template-columns: repeat(10, 2.5rem);
+    grid-template-rows: repeat(10, 2.5rem);
+    border: 1px solid white;
+    width: 400px;
+    height: 400px;
+  }
+  .gameboard--right {
+    .taken {
+      background-color: @bg;
+
+      &:hover {
+        background-color:#3a3a50;
+      }
+    }
+  }
 }
 
 .game-square {
@@ -47,7 +58,7 @@ html {
   &:hover {
     transition-property: background-color;
     transition-duration: 100ms;
-    background-color: #3A3A50;
+    background-color: #3a3a50;
   }
 
   &:active {
@@ -56,10 +67,19 @@ html {
     background-color: #595979;
   }
 
-  &.hit {
-    background-color: red;
-    border-radius: 20px;
-    transform:scale(0.3)
+  &.taken {
+    background-color: green;
   }
 
+  &.hit {
+    background-color: rgb(92, 92, 92);
+  }
+
+  &.hit.taken {
+    background-color: rgb(120, 0, 0);
+  }
+
+  &.hit::after {
+    content: url('./icons/miss-mark.svg');
+  }
 }

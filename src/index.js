@@ -3,25 +3,34 @@ const Player = require('../factories/Player')
 const Gameboard = require('../factories/Gameboard')
 const DisplayController = require('../helpers/DisplayController')
 
+const display = DisplayController()
 const playerGameboard = Gameboard()
 const computerGameboard = Gameboard()
 
 const player = Player('Player', computerGameboard)
 const computer = Player('CPU', playerGameboard, true)
-const display = DisplayController()
 
 // tests //
-computer.takeTurn(0)
+playerGameboard.placeShip([0, 1, 2, 3, 4])
+computerGameboard.placeShip([0, 1, 2, 3, 4])
+
+computer.takeTurn(2)
+computer.takeTurn(10)
+computer.takeTurn(3)
 player.takeTurn(3)
 
 display.initializeGameboards()
-display.updateGameboardSquares(playerGameboard.board)
-display.updateGameboardSquares(gameboardRight)
 
-const gameStart = () => {
-  // create both players, assign gameboards
-
-  // pre place ships
-
-  // display controller generate boards and assign each square a value to the gameboard
+const gameboardRight = document.querySelector('.gameboard--right')
+const gameboardChildren = gameboardRight.children
+for (let i = 0; i < gameboardChildren.length; i++) {
+  gameboardChildren[i].addEventListener('click', () => {
+    player.takeTurn(i)
+    if (computerGameboard) {
+      display.updateComputerBoard(computerGameboard.board)
+    }
+  })
 }
+
+display.updatePlayerSquares(playerGameboard.board)
+display.updateComputerBoard(computerGameboard.board)
