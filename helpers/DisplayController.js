@@ -14,6 +14,8 @@ const DisplayController = () => {
     createGameboardSquares(gameboardLeft)
     createGameboardSquares(gameboardRight)
     displayGameBoards()
+    placeShipButton()
+    placeShipDirection()
   }
 
   const createGameboardSquares = (gameboard) => {
@@ -25,7 +27,7 @@ const DisplayController = () => {
     }
   }
 
-  const updatePlayerSquares = (playerGameboard) => {
+  const updatePlayerBoard = (playerGameboard) => {
     const gameboardDisplayChildren = gameboardLeft.children
     for (let i = 0; i < playerGameboard.length; i++) {
       if (playerGameboard[i].taken === true) {
@@ -51,6 +53,30 @@ const DisplayController = () => {
     }
   }
 
+  const placeShipButton = () => {
+    const div = document.createElement('div')
+    const addShipButton = document.createElement('button')
+    addShipButton.textContent = 'Add Ship'
+    addShipButton.classList.add('add-ship--button')
+    div.classList.add('add-ship')
+    div.appendChild(addShipButton)
+    mainContainer.appendChild(div)
+  }
+
+  const placeShipDirection = () => {
+    const directionButton = document.createElement('button')
+    directionButton.classList.add('add-ship--direction')
+    directionButton.textContent = 'Vertical'
+    directionButton.addEventListener('click', () => {
+      if (directionButton.textContent === 'Vertical') {
+        directionButton.textContent = 'Horizontal'
+      } else {
+        directionButton.textContent = 'Vertical'
+      }
+    })
+    document.querySelector('.add-ship').appendChild(directionButton)
+  }
+
   // const updateGameboardSquares = (gameboardElement, userGameboard) => {
   //   const board = userGameboard
   //   const gameboardChildren = gameboardElement.children
@@ -69,7 +95,7 @@ const DisplayController = () => {
     mainContainer.append(gameboards)
   }
 
-  return { initializeGameboards, updatePlayerSquares, updateComputerBoard }
+  return { initializeGameboards, updatePlayerSquares: updatePlayerBoard, updateComputerBoard }
 }
 
 module.exports = DisplayController
