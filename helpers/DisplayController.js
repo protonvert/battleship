@@ -14,7 +14,6 @@ const DisplayController = () => {
     createGameboardSquares(gameboardLeft)
     createGameboardSquares(gameboardRight)
     displayGameBoards()
-    placeShipButton()
     placeShipDirection()
   }
 
@@ -53,16 +52,6 @@ const DisplayController = () => {
     }
   }
 
-  const placeShipButton = () => {
-    const div = document.createElement('div')
-    const addShipButton = document.createElement('button')
-    addShipButton.textContent = 'Add Ship'
-    addShipButton.classList.add('add-ship--button')
-    div.classList.add('add-ship')
-    div.appendChild(addShipButton)
-    mainContainer.appendChild(div)
-  }
-
   const placeShipDirection = () => {
     const directionButton = document.createElement('button')
     directionButton.classList.add('add-ship--direction')
@@ -74,28 +63,14 @@ const DisplayController = () => {
         directionButton.textContent = 'Vertical'
       }
     })
-    document.querySelector('.add-ship').appendChild(directionButton)
+    mainContainer.appendChild(directionButton)
   }
-
-  // const updateGameboardSquares = (gameboardElement, userGameboard) => {
-  //   const board = userGameboard
-  //   const gameboardChildren = gameboardElement.children
-  //   for (let i = 0; i < userGameboard.length; i++) {
-  //     if (board[i].taken === true) {
-  //       // add taken class to make it green
-  //       gameboardChildren[i].classList.add('taken')
-  //     }
-  //     if (board[i].hit === true) {
-  //       gameboardChildren[i].classList.add('hit')
-  //     }
-  //   }
-  // }
 
   const displayGameBoards = () => {
     mainContainer.append(gameboards)
   }
 
-  return { initializeGameboards, updatePlayerSquares: updatePlayerBoard, updateComputerBoard }
+  return { initializeGameboards, updatePlayerBoard, updateComputerBoard, placeShipDirection }
 }
 
 module.exports = DisplayController
