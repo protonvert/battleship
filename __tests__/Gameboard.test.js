@@ -19,7 +19,7 @@ describe('Gameboard Functions', () => {
   it('placing a ship', () => {
     let positionsTaken = true
     const positions = [0, 10, 20, 30, 40]
-    testBoard.placeShip(positions)
+    testBoard.placeShip(positions, 'Vertical')
     positions.forEach((pos) => {
       if (testBoard.board[pos].taken === false) {
         positionsTaken = false

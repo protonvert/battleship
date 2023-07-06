@@ -1,4 +1,5 @@
 const Ship = require('./Ship')
+const firstDigit = require('../helpers/Utility')
 
 const Gameboard = () => {
   // ------------------------- Functions -------------------------
@@ -25,20 +26,33 @@ const Gameboard = () => {
     })
   }
 
-  const placeShip = (coordinates) => {
-    if (coordinatesWithinBoundaryAndNotTaken(coordinates) === true) {
+  const placeShip = (coordinates, direction) => {
+    if (coordinatesWithinBoundaryAndNotTaken(coordinates, direction) === true) {
       setCoordinatesToTaken(coordinates)
       ships.push(Ship(coordinates))
+      console.log(ships)
+    } else {
+      console.log('nah')
     }
   }
 
-  const coordinatesWithinBoundaryAndNotTaken = (coordinates) => {
+  const coordinatesWithinBoundaryAndNotTaken = (coordinates, direction) => {
     let coordinatesValid = true
-    for (let i = 0; i < coordinates; i++) {
-      if (coordinates[i] >= 100 || coordinates[i] < 0 || board[i].taken === true) {
-        coordinatesValid = false
+    if (direction === 'Vertical') {
+      for (let i = 0; i < coordinates.length; i++) {
+        if (coordinates[i] >= 100 || coordinates[i] < 0 || board[i].taken === true) {
+          coordinatesValid = false
+        }
+      }
+    } else if (direction === 'Horizontal') {
+      const firstDigitInCoordinates = firstDigit(coordinates[0])
+      for (let i = 0; i < coordinates.length; i++) {
+        if (firstDigit(coordinates[i]) !== firstDigitInCoordinates) {
+          coordinatesValid = false
+        }
       }
     }
+    console.log('DIRECTION: ', direction)
     return coordinatesValid
   }
 

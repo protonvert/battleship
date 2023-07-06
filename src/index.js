@@ -54,7 +54,7 @@ const pickShipPositions = () => {
       }
 
       shipPlacementIterator++
-      playerGameboard.placeShip(arr)
+      playerGameboard.placeShip(arr, direction)
       display.updatePlayerBoard(playerGameboard.board)
     })
   }
@@ -62,7 +62,6 @@ const pickShipPositions = () => {
 document.querySelector('.add-ship--direction').addEventListener('click', () => {
   if (direction === 'Vertical') direction = 'Horizontal'
   else direction = 'Vertical'
-  console.log(direction)
 })
 
 pickShipPositions()
